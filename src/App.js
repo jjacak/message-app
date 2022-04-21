@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Container, Navbar } from 'react-bootstrap';
+import Login from './components/Login';
+import Brand from './components/Brand';
+import MessagePanel from './components/MessagePanel';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [userName, setUserName] = useState(null);
+	const getUserName = (name) => {
+		setUserName(name);
+	};
+	return (
+		<div className="App">
+			<Brand />
+			<Container>
+				{!userName && <Login onSubmit={getUserName} />}
+				{userName && <MessagePanel currentUser = {userName}/>}
+			</Container>
+		</div>
+	);
 }
 
 export default App;
